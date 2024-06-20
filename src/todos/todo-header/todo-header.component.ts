@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { TodoService } from '../../service/todo.service';
 
 @Component({
   selector: 'app-todo-header',
@@ -9,12 +10,15 @@ import { Component } from '@angular/core';
   styleUrl: './todo-header.component.css'
 })
 export class TodoHeaderComponent {
+  todoService = inject(TodoService)
   text:string = ""
 
   changeText(event: Event) {
-
+    const target = event.target as HTMLInputElement
+    this.text = target.value
   }
   addTodo() {
-    
+    this.todoService.addTodo(this.text)
+    this.text = ''
   }
 }
