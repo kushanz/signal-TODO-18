@@ -18,6 +18,9 @@ export class TodoFooterComponent {
   activeCount = computed(() => {
     return this.todoService.todoSig().filter((todo) => !todo.isCompleted).length
   })
+  noTodoClass = computed(() => {
+    return this.todoService.todoSig().length === 0
+  })
 
   changeFilter(event: Event,filterName: FilterEnum) {
     event.preventDefault()

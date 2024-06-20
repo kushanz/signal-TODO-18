@@ -1,4 +1,4 @@
-<footer class="footer">
+<footer class="footer" [ngClass]="{hidden : noTodoClass()}">
     <span class="todo-count">
         <strong>{{activeCount()}}</strong>
       </span>
