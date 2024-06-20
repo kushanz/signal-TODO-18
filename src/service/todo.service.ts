@@ -21,6 +21,12 @@ export class TodoService {
   changeFilter(filterName:FilterEnum) {
     this.filterSig.set(filterName)
   }
+  toggleAll(isCompleted:boolean) {
+    this.todoSig.update((todos) => todos.map((todo) => ({...todo,isCompleted})))
+  }
+  removeTodo(id: string) {
+    this.todoSig.update((todos) => todos.filter(todo => todo.id !== id))
+  }
 
   constructor() { }
 }

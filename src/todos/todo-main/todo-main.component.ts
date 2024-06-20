@@ -14,6 +14,9 @@ import { TodoItemComponent } from '../todo-item/todo-item.component';
 export class TodoMainComponent {
 
   todoService = inject(TodoService)
+
+  editingId: string | null = null;
+
   visibleTodos = computed(() => {
     const todos = this.todoService.todoSig()
     const filter = this.todoService.filterSig()
@@ -25,4 +28,16 @@ export class TodoMainComponent {
     }
     return todos
   })
+
+  setEditingId(editingId: string | null): void {
+    this.editingId = editingId;
+  }
+
+  isAllTodosSelected = computed(() => {
+    this.todoService.todoSig().every((todo) => todo.isCompleted)
+  })
+  toggleAllTodos(event:Event) {
+    const target = event.target as HTMLInputElement
+    this.todoService.toggleAll(target.checked)
+  }
 }
